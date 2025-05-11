@@ -1,0 +1,89 @@
+import type { RequestEvent } from '@sveltejs/kit';
+import Replicate from 'replicate';
+import { REPLICATE_API_TOKEN } from '$env/static/private';
+
+const replicate = new Replicate({
+  auth: REPLICATE_API_TOKEN
+});
+
+export async function POST(event: RequestEvent) {
+  try {
+    const { 
+      image_url, 
+      mask_url, 
+      prompt,
+      num_inference_steps = 50,
+      guidance_scale = 7.5,
+      mode = 'edit' // 'edit' or 'object'
+    } = await event.request.json();
+
+    if (!image_url || !mask_url) {
+      return new Response('Missing required fields', { status: 400 });
+    }
+
+    // Adjust parameters based on mode
+    const finalGuidance = mode === 'object' ? 12 : 7.5;
+    const finalSteps = mode === 'object' ? 50 : 30;
+    const finalNegativePrompt = mode === 'object' 
+      ? "ugly, blurry, low quality, distorted, deformed, disfigured, bad anatomy, watermark"
+      : "ugly, blurry, low quality, distorted";
+
+    console.log('Starting inpainting with inputs:', {
+      imageUrlType: typeof image_url,
+      imageUrlLength: image_url?.length,
+      maskUrlType: typeof mask_url,
+      maskUrlLength: mask_url?.length,
+      prompt,
+      steps: finalSteps,
+      guidance: finalGuidance,
+      mode
+    });
+
+    // Create the prediction using Flux Fill model
+    console.log('Creating prediction...');
+    const prediction = await replicate.run(
+      "black-forest-labs/flux-fill-dev",
+      {
+        input: {
+          image: image_url,
+          mask: mask_url,
+          prompt: prompt || 'restore this image naturally',
+          num_inference_steps: finalSteps,
+          guidance_scale: finalGuidance,
+          seed: Math.floor(Math.random() * 1000000),
+          scheduler: "dpm-2m",
+          negative_prompt: finalNegativePrompt,
+          image_resolution: 1024,
+          num_outputs: 1,
+          high_quality_mode: true
+        }
+      }
+    ) as unknown as string;
+
+    console.log('Got prediction result:', prediction);
+
+    // Get the generated image URL from the prediction result
+    const imageUrl = Array.isArray(prediction) ? prediction[0] : prediction;
+    if (!imageUrl) {
+      throw new Error('No output image URL received');
+    }
+
+    // Fetch the image with explicit quality preservation
+    console.log('Fetching generated image from:', imageUrl);
+    const imageResponse = await fetch(imageUrl);
+    if (!imageResponse.ok) {
+      throw new Error('Failed to fetch generated image');
+    }
+
+    // Stream the image directly without additional processing
+    return new Response(imageResponse.body, {
+      headers: {
+        'Content-Type': 'image/png',
+        'Cache-Control': 'no-cache'
+      }
+    });
+  } catch (error) {
+    console.error('Error with inpainting:', error);
+    return new Response('Internal server error', { status: 500 });
+  }
+} 

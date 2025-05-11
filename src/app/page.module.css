@@ -163,3 +163,149 @@ a.secondary {
     filter: invert();
   }
 }
+
+.container {
+  max-width: var(--breakpoint-desktop);
+  margin: 0 auto;
+  padding: var(--spacing-medium);
+  min-height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-large);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--spacing-large);
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-medium);
+}
+
+.walletButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.walletButton {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  color: var(--text-color);
+  font-family: var(--font-family);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.walletButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-color: var(--accent-color);
+}
+
+.walletButton img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.walletButton span {
+  font-weight: 500;
+}
+
+.walletOptions {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  z-index: 10;
+  min-width: 200px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.button {
+  font-family: var(--font-family);
+  padding: var(--button-padding);
+  border-radius: var(--border-radius);
+  transition: all var(--transition);
+  cursor: pointer;
+  text-transform: var(--button-text-transform);
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  border: 1px solid var(--button-primary-border);
+  font-size: var(--font-size-base);
+  box-shadow: var(--button-primary-shadow);
+}
+
+.button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.section {
+  margin: var(--spacing-large) 0;
+  padding: var(--spacing-medium);
+  background: var(--card-background);
+  border-radius: var(--border-radius);
+}
+
+.identityContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  flex-wrap: wrap;
+}
+
+.nftGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--spacing-medium);
+}
+
+@media (min-width: 768px) {
+  .nftGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .nftGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.nftCard {
+  padding: var(--spacing-medium);
+  border: 1px solid var(--card-background-mid);
+  border-radius: var(--border-radius);
+  background: var(--card-background);
+}
+
+.nftCard h3 {
+  margin-bottom: var(--spacing-small);
+  font-size: var(--font-size-xl);
+}
+
+.cta {
+  text-align: center;
+}
+
+.cta p {
+  margin-bottom: var(--spacing-medium);
+}

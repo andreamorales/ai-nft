@@ -1,7 +1,5 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Import Google Fonts - Sans Linear variant */
+@import url('https://fonts.googleapis.com/css2?family=Recursive:CASL,CRSV,MONO,slnt,wght@0,0,0,0,300..1000&display=swap');
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -19,9 +17,10 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-variation-settings: 'MONO' 0, 'CASL' 0, 'slnt' 0, 'CRSV' 0;
 }
 
 * {
@@ -39,4 +38,184 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+/* Font faces */
+@font-face {
+  font-family: 'Refract';
+  src: url('/fonts/Refract-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Global styles */
+button {
+  text-transform: capitalize;
+}
+
+/* Root variables */
+:root {
+  /* Breakpoints */
+  --breakpoint-mobile: 480px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 992px;
+  --breakpoint-large: 1200px;
+
+  /* Font sizes */
+  --font-size: 16px;
+  --font-size-xs: 0.75rem;
+  --font-size-small: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-large: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+
+  /* Typography */
+  --font-family: 'Recursive', system-ui, -apple-system, sans-serif;
+  --font-family-display: 'Refract', sans-serif;
+  --line-height: 100%;
+
+  /* Spacing */
+  --spacing-extra-small: 0.5rem;
+  --spacing-small: 1rem;
+  --spacing-medium: 2rem;
+  --spacing-large: 3rem;
+  --spacing-extra-large: 4rem;
+  --spacing-huge: 10rem;
+
+  /* Colors */
+  --white: #F3EAD6;
+  --black: #252022;
+  --clear: transparent;
+  --card-background: #272324;
+  --card-background-mid: #1f1c1d;
+  --card-background-dark: #181617;
+
+  /* Theme colors */
+  --bg-color: var(--black);
+  --text-color: var(--white);
+  --button-primary-bg: var(--white);
+  --button-primary-text: var(--black);
+  --button-primary-border: var(--white);
+  --button-primary-shadow: rgba(255, 255, 255, 0.1);
+
+  /* Button styles */
+  --button-padding: 0.5rem 1rem;
+  --button-margin: 0rem;
+  --button-line-height: 1rem;
+  --button-text-transform: capitalize;
+  --border-radius: 0.65rem;
+  --transition: 0.2s ease-in-out;
+}
+
+/* Base styles */
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variation-settings: 'MONO' 0, 'CASL' 0, 'slnt' 0, 'CRSV' 0;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-display);
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--spacing-medium);
+}
+
+h2 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--spacing-small);
+}
+
+p {
+  font-family: var(--font-family);
+  font-variation-settings: 'MONO' 0, 'CASL' 0, 'slnt' 0, 'CRSV' 0;
+}
+
+/* Button styles */
+button,
+.button,
+.oc-connect-button {
+  font-family: var(--font-family) !important;
+  font-variation-settings: 'MONO' 0, 'CASL' 0, 'slnt' 0, 'CRSV' 0 !important;
+  padding: var(--button-padding) !important;
+  border-radius: var(--border-radius) !important;
+  transition: all var(--transition) !important;
+  cursor: pointer !important;
+  text-transform: var(--button-text-transform) !important;
+  background: var(--button-primary-bg) !important;
+  color: var(--button-primary-text) !important;
+  border: 1px solid var(--button-primary-border) !important;
+  font-size: var(--font-size-base) !important;
+  box-shadow: var(--button-primary-shadow) !important;
+}
+
+.button:hover,
+.oc-connect-button:hover {
+  opacity: 0.9 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Layout */
+.container {
+  max-width: var(--breakpoint-desktop);
+  margin: 0 auto;
+  padding: var(--spacing-medium);
+}
+
+.section {
+  margin: var(--spacing-large) 0;
+  padding: var(--spacing-medium);
+  background: var(--card-background);
+  border-radius: var(--border-radius);
+}
+
+/* Responsive styles */
+@media (max-width: var(--breakpoint-mobile)) {
+  :root {
+    --font-size: 14px;
+  }
+  
+  .container {
+    padding: var(--spacing-small);
+  }
+}
+
+/* OnchainKit overrides */
+.oc-dropdown {
+  background: var(--card-background) !important;
+  border: 1px solid var(--card-background-mid) !important;
+  border-radius: var(--border-radius) !important;
+}
+
+.oc-dropdown-disconnect {
+  color: var(--text-color) !important;
+  font-family: var(--font-family) !important;
+}
+
+.oc-identity {
+  color: var(--text-color) !important;
+  font-family: var(--font-family) !important;
 }

@@ -1,95 +1,122 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import styles from './page.module.css';
+import { useAccount, useConnect } from 'wagmi';
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const { address, isConnected } = useAccount();
+  const { connect, connectors } = useConnect();
+  const [mounted, setMounted] = useState(false);
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.content}>
+        {/* Header Section */}
+        <header className={styles.header}>
+          <h1>AI NFT Platform</h1>
+          <div className={styles.buttonContainer}>
+            {!isConnected ? (
+              <div className={styles.walletButtons}>
+                <button 
+                  onClick={() => connect({ connector: connectors[0] })}
+                  className={styles.walletButton}
+                  title="Connect with MetaMask"
+                >
+                  <Image
+                    src="/MetaMask-icon-fox.svg"
+                    alt="MetaMask"
+                    width={24}
+                    height={24}
+                  />
+                  <span>MetaMask</span>
+                </button>
+                <button 
+                  onClick={() => connect({ connector: connectors[1] })}
+                  className={styles.walletButton}
+                  title="Connect with Coinbase Wallet"
+                >
+                  <Image
+                    src="/BrandLogo.org - Coinbase Wallet Logo.svg"
+                    alt="Coinbase Wallet"
+                    width={24}
+                    height={24}
+                  />
+                  <span>Coinbase Wallet</span>
+                </button>
+              </div>
+            ) : (
+              <button className={styles.button}>
+                Connected: {address?.slice(0, 6)}...{address?.slice(-4)}
+              </button>
+            )}
+          </div>
+        </header>
+
+        {/* NFT Gallery Section */}
+        <section className={styles.section}>
+          <h2>Featured NFTs</h2>
+          <div className={styles.nftGrid}>
+            <div className={styles.nftCard}>
+              <h3>NFT #1</h3>
+              <p>Coming Soon</p>
+            </div>
+            <div className={styles.nftCard}>
+              <h3>NFT #2</h3>
+              <p>Coming Soon</p>
+            </div>
+            <div className={styles.nftCard}>
+              <h3>NFT #3</h3>
+              <p>Coming Soon</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Call to Action */}
+        <section className={`${styles.section} ${styles.cta}`}>
+          <h2>Ready to Create Your NFT?</h2>
+          <p>Connect your wallet to start minting your AI-generated NFTs</p>
+          {!isConnected && (
+            <div className={styles.walletButtons}>
+              <button 
+                onClick={() => connect({ connector: connectors[0] })}
+                className={styles.walletButton}
+                title="Connect with MetaMask"
+              >
+                <Image
+                  src="/MetaMask-icon-fox.svg"
+                  alt="MetaMask"
+                  width={24}
+                  height={24}
+                />
+                <span>MetaMask</span>
+              </button>
+              <button 
+                onClick={() => connect({ connector: connectors[1] })}
+                className={styles.walletButton}
+                title="Connect with Coinbase Wallet"
+              >
+                <Image
+                  src="/BrandLogo.org - Coinbase Wallet Logo.svg"
+                  alt="Coinbase Wallet"
+                  width={24}
+                  height={24}
+                />
+                <span>Coinbase Wallet</span>
+              </button>
+            </div>
+          )}
+        </section>
+      </div>
     </div>
   );
 }
