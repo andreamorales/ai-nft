@@ -5,7 +5,7 @@ import { baseSepolia, base } from 'wagmi/chains';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 import { useState, useEffect } from 'react';
-import { injected, coinbaseWallet } from 'wagmi/connectors';
+import { injected, coinbaseWallet, metaMask } from 'wagmi/connectors';
 
 // Your Web3Modal Project ID
 const projectId = '63bc98f7-06ff-45a7-b661-5f5e9c111801';
@@ -30,6 +30,7 @@ export function Providers({ children }: { children: ReactNode }) {
           appName: 'AI NFT Platform',
           appLogoUrl: 'https://your-url.com/logo.png',
         }),
+        metaMask()
       ],
       transports: {
         [base.id]: http(),

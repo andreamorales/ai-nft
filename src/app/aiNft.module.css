@@ -1,0 +1,430 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.sideLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+  margin: 2rem auto;
+}
+
+@media (max-width: 992px) {
+  .sideLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inputGroup {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inputGroup.inSideLayout {
+  margin: 0;
+}
+
+.textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #2d2d2d;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 100px;
+  transition: all 0.2s ease-in-out;
+  font-family: 'Recursive', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #4a4a4a;
+  background-color: #222222;
+}
+
+.textarea::placeholder {
+  color: #666666;
+}
+
+.error {
+  color: #ff4444;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: rgba(255, 68, 68, 0.1);
+  margin: 1rem 0;
+}
+
+.imageContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.imageContainer.inSideLayout {
+  margin: 0;
+}
+
+.generatedImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  object-fit: contain;
+}
+
+.editButton {
+  margin-top: 1rem;
+}
+
+.canvasWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.canvasTools {
+  width: 100%;
+  padding: 1rem;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.brushControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brushControls label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #ffffff;
+}
+
+.brushControls input[type="range"] {
+  width: 200px;
+}
+
+.canvas {
+  border: 2px solid #2d2d2d;
+  border-radius: 8px;
+  background-color: transparent;
+  cursor: crosshair;
+}
+
+.canvasControls {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  background: var(--card-background);
+  border-radius: var(--border-radius);
+  margin-top: 1rem;
+}
+
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.2rem;
+  border-radius: 8px;
+}
+
+.inpaintPopup {
+  position: absolute;
+  background-color: #1a1a1a;
+  border: 2px solid #2d2d2d;
+  border-radius: 8px;
+  padding: 1rem;
+  min-width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.presetGroup {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.presetGroup label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.presetGroup input[type="radio"] {
+  cursor: pointer;
+}
+
+.imageActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.mintButton {
+  background-color: #6366f1;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.mintButton:hover {
+  background-color: #4f46e5;
+}
+
+.mintCard {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  min-width: 200px;
+}
+
+.success {
+  background-color: #10B981;
+  color: white;
+  padding: 0.75rem;
+  border-radius: var(--border-radius);
+  margin-top: 1rem;
+  text-align: center;
+  width: 100%;
+  font-family: var(--font-family);
+}
+
+.mintOptions {
+  width: 100%;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mintOptions h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.mintOptions h4 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #f3ebd6;
+}
+
+.mintCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .mintCards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.metaMaskMintCard {
+  background: #1a1a1a;
+  border: 2px solid #2d2d2d;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.metaMaskMintContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.priceInput {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.priceInput label {
+  font-size: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #f3ebd6;
+}
+
+.priceInput input {
+  width: 100%;
+  padding: 0.75rem;
+  background: #252022;
+  border: 1px solid #2d2d2d;
+  border-radius: 4px;
+  color: #f3ebd6;
+  font-size: 1rem;
+}
+
+.metaMaskMintButton {
+  width: 100%;
+  background-color: #f6851b !important; /* MetaMask orange */
+  color: #1a1a1a !important;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.metaMaskMintButton:hover {
+  background-color: #e2761b !important; /* Darker MetaMask orange on hover */
+}
+
+.metaMaskMintButton:disabled {
+  background-color: #5a5a5a !important;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.networkInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  color: #f3ebd6;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.correctNetwork {
+  color: #10B981;
+  font-weight: 600;
+}
+
+.wrongNetwork {
+  color: #EF4444;
+  font-weight: 600;
+}
+
+.networkWarning {
+  color: #F59E0B;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.addNetworkButton {
+  background-color: #0052FF; /* Coinbase/Base blue */
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.addNetworkButton:hover {
+  background-color: #003EBF;
+}
+
+.connectWalletPrompt {
+  background-color: #1a1a1a;
+  border: 2px solid #2d2d2d;
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  text-align: center;
+}
+
+.connectWalletPrompt p {
+  color: #f3ebd6;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.switchNetworkButton {
+  width: 100%;
+  background-color: #FF3B30 !important; /* Error red */
+  color: white !important;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem !important;
+  font-size: 1rem !important;
+  transition: all 0.2s ease;
+  animation: pulse 2s infinite;
+}
+
+.switchNetworkButton:hover {
+  background-color: #E02D23 !important;
+  transform: translateY(-2px);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 59, 48, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 59, 48, 0);
+  }
+} 

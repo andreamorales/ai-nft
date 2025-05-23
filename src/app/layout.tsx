@@ -1,13 +1,8 @@
 import '@coinbase/onchainkit/styles.css';
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { headers } from 'next/headers';
-import { type ReactNode } from 'react';
-import { cookieToInitialState } from 'wagmi';
-import { Providers } from './providers';
-
-const inter = Inter({ subsets: ['latin'] });
+import { ClientProviders } from './ClientProviders';
+import { refract } from './fonts';
 
 export const metadata: Metadata = {
   title: 'AI NFT App',
@@ -16,13 +11,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Providers>{children}</Providers>
+      <body className={refract.className}>
+        <ClientProviders>
+          {children}
+        </ClientProviders>
       </body>
     </html>
   );

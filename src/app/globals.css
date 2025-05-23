@@ -15,9 +15,13 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: var(--font-family);
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+  font-family: var(--font-family), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-variation-settings: 'MONO' 0, 'CASL' 0, 'slnt' 0, 'CRSV' 0;
@@ -56,6 +60,9 @@ button {
 
 /* Root variables */
 :root {
+  --foreground-rgb: 243, 234, 214;
+  --background-rgb: 37, 32, 34;
+  
   /* Breakpoints */
   --breakpoint-mobile: 480px;
   --breakpoint-tablet: 768px;
@@ -117,11 +124,9 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
   font-family: var(--font-family);
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-size: var(--font-size);
-  line-height: var(--line-height);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-variation-settings: 'MONO' 0, 'CASL' 0, 'slnt' 0, 'CRSV' 0;
@@ -159,7 +164,6 @@ button,
 .button,
 .oc-connect-button {
   font-family: var(--font-family) !important;
-  font-variation-settings: 'MONO' 0, 'CASL' 0, 'slnt' 0, 'CRSV' 0 !important;
   padding: var(--button-padding) !important;
   border-radius: var(--border-radius) !important;
   transition: all var(--transition) !important;
@@ -170,6 +174,7 @@ button,
   border: 1px solid var(--button-primary-border) !important;
   font-size: var(--font-size-base) !important;
   box-shadow: var(--button-primary-shadow) !important;
+  font-variation-settings: 'MONO' 0, 'CASL' 0, 'slnt' 0, 'CRSV' 0 !important;
 }
 
 .button:hover,
@@ -213,9 +218,11 @@ button,
 .oc-dropdown-disconnect {
   color: var(--text-color) !important;
   font-family: var(--font-family) !important;
+  font-variation-settings: 'MONO' 0, 'CASL' 0, 'slnt' 0, 'CRSV' 0 !important;
 }
 
 .oc-identity {
   color: var(--text-color) !important;
   font-family: var(--font-family) !important;
+  font-variation-settings: 'MONO' 0, 'CASL' 0, 'slnt' 0, 'CRSV' 0 !important;
 }
